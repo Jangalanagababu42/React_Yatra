@@ -1,7 +1,6 @@
 import React from "react";
 
 function Button(props) {
-  console.log(props);
   const { children, clickAction, data } = props;
   const handleClick = () => clickAction?.();
 

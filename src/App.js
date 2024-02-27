@@ -1,13 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "./Button";
+import Text from "./Text";
 
 function App() {
-  const handleClickAction = () => console.log("i was clicked from parent");
+  const [data, setData] = useState([
+    { id: "a", text: "text 1" },
+    { id: "b", text: "text 2" },
+    { id: "c", text: "text 3" },
+    { id: "d", text: "text 4" },
+  ]);
+  const handleClickAction = () => {
+    setData((prev) => [{ id: "e", text: "text 5" }, ...prev]);
+  };
 
   return (
-    <Button data={{ a: { b: { c: "d" } } }} clickAction={handleClickAction}>
-      Click Me
-    </Button>
+    <>
+      {data.map((item) => (
+        <Text key={item.id}>{item.text}</Text>
+      ))}
+
+      <Button data={{ a: { s: { d: "c" } } }} clickAction={handleClickAction}>
+        Click Me
+      </Button>
+    </>
   );
 }
 
