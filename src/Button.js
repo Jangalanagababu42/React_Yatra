@@ -1,6 +1,7 @@
-import React from "react";
+import React, { memo } from "react";
 
-function Button(props) {
+const Button = memo((props) => {
+  console.log("redndering button");
   const { children, clickAction, data } = props;
   const handleClick = () => clickAction?.();
 
@@ -9,6 +10,6 @@ function Button(props) {
       {children}+ {data?.a?.b?.c}
     </button>
   );
-}
+});
 
 export default Button;
