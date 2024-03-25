@@ -1,39 +1,29 @@
 // Timer.js
-import React, { useEffect, useState, useLayoutEffect } from "react";
+import React, { useEffect, useState, useLayoutEffect, useRef } from "react";
 
 function Timer(props) {
+  const interval = useRef(null);
   const { customText } = props;
   const [counter, setCounter] = useState(0);
   useEffect(() => {
-    const interval = setInterval(() => {
+    // const
+    interval.current = setInterval(() => {
       console.log("i am running set interval");
       setCounter((prev) => prev + 1);
     }, 1000);
-    console.log("creating interval with ID " + interval);
+    console.log("creating interval with ID " + interval.current);
     return () => {
-      console.log("i was unmounted");
-      console.log("creating interval with ID " + interval);
-      clearInterval(interval);
+      clearInterval(interval.current);
     };
   }, []);
-  useEffect(() => {
-    return () => {
-      console.log("cleaning up function for 2nd useeffect with dependecies");
-    };
-  }, [customText]);
-  useLayoutEffect(() => {
-    console.log("this is called with useLayoutEffect");
-  }, []);
-
-  // useEffect(() => {
-  //   console.log("no dependencies so rendering again and again");
-  //   return () => {
-  //     console.log("cleaning up function for 3rd useeffect with dependecies");
-  //   };
-  // });
+  const TimeHandler = () => {
+    console.log("stopping timer for the interval " + interval.current);
+    clearInterval(interval.current);
+  };
   return (
     <div>
-      <h1>{counter}</h1>
+      <h1>current timer :{counter}</h1>
+      <button onClick={TimeHandler}>Stop Timer</button>
     </div>
   );
 }

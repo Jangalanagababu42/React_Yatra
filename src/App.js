@@ -1,35 +1,39 @@
-import React, { useCallback, useEffect, useState } from "react";
-
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import Timer from "./Timer";
 import ButtonWithToolTip from "./ButtonWithToolTip";
 import "./styles.css";
 
 function App() {
+  let localvar = 0;
+  console.log(localvar, "localvar"); // logs 0
+  const ref = useRef(0);
+  console.log(ref.current, "ref.current"); //logs
+  const [mycount, setCount] = useState(0);
+
   return (
     <>
-      {" "}
-      <ButtonWithToolTip
-        tooltipContent={
-          <div>
-            this tooltip doesnot fit above the code
-            <br />
-            this is why it's displayed below code
-          </div>
-        }
+      <button onClick={() => (localvar += 1)}>Local Button</button>
+      <button
+        onClick={() => {
+          ref.current += 1;
+        }}
       >
-        Hover over me (tooltip above)
-      </ButtonWithToolTip>
-      <div style={{ height: 50 }}></div>
-      <ButtonWithToolTip
-        tooltipContent={<div>this tooltip fit above the code</div>}
+        UseRef Button
+      </button>
+      <button
+        onClick={() => {
+          setCount((prev) => prev + 1);
+        }}
       >
-        Hover over me (tooltip below)
-      </ButtonWithToolTip>
-      <div style={{ height: 50 }}></div>
-      <ButtonWithToolTip
-        tooltipContent={<div>this tooltip fit above the code</div>}
-      >
-        Hover over me (tooltip below)
-      </ButtonWithToolTip>
+        Usestate Button
+      </button>
+      <div>
+        <span>Local Variable:{localvar}</span>
+        <span>UseRef value:{ref.current}</span>
+        <span>Counter Value:{mycount}</span>
+      </div>
+      <div>My Timer</div>
+      <Timer>This is Timer</Timer>
     </>
   );
 }
