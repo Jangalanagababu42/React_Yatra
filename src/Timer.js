@@ -1,5 +1,5 @@
 // Timer.js
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useLayoutEffect } from "react";
 
 function Timer(props) {
   const { customText } = props;
@@ -21,13 +21,16 @@ function Timer(props) {
       console.log("cleaning up function for 2nd useeffect with dependecies");
     };
   }, [customText]);
+  useLayoutEffect(() => {
+    console.log("this is called with useLayoutEffect");
+  }, []);
 
-  useEffect(() => {
-    console.log("no dependencies so rendering again and again");
-    return () => {
-      console.log("cleaning up function for 3rd useeffect with dependecies");
-    };
-  });
+  // useEffect(() => {
+  //   console.log("no dependencies so rendering again and again");
+  //   return () => {
+  //     console.log("cleaning up function for 3rd useeffect with dependecies");
+  //   };
+  // });
   return (
     <div>
       <h1>{counter}</h1>
