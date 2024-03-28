@@ -12,6 +12,7 @@ const ThirdParent = memo((props) => {
     setCounter((prev) => prev + 1);
     handleChange?.();
   };
+
   return (
     <>
       Im super slow component
